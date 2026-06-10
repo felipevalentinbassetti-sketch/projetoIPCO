@@ -2,7 +2,7 @@
 #include "loja.h"
 int main(){
     Jogo inventario[100];
-    int totalJogos = 0;
+    int totalJogos;
     int opcao;
 
     totalJogos = carregarJogos(inventario);

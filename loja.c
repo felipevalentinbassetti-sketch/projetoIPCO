@@ -9,15 +9,15 @@ int carregarJogos(Jogo vetorJogos[]){
 
     if(arquivo == NULL){
         printf("Arquivo 'jogos.txt' nao existe, inventario vazio");
-        return;
+        return 0;
     }
 
-    while(fscanf(arquivo, "%49[^;]; %29[^;]; %f; %d; %d\n",
+    while(fscanf(arquivo, "%49[^;]; %29[^;]; % f; %d; %d\n",
         vetorJogos[contador].nome,
         vetorJogos[contador].genero,
-        vetorJogos[contador].preco,
-        vetorJogos[contador].classificacao,
-        vetorJogos[contador].downloads)==5){
+        &vetorJogos[contador].preco,
+        &vetorJogos[contador].classificacao,
+        &vetorJogos[contador].downloads)==5){
             contador++;
             if(contador>=100){
                 printf("Limite maximo de jogos atingidos\n");
