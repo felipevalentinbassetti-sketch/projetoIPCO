@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include "loja.h"
 
@@ -80,7 +79,7 @@ int cadastrarJogo(Jogo vetorJogos[], int totalJogos){
 void salvarJogos(Jogo vetorJogos[], int totalJogos) {
     FILE *arquivo = fopen("jogos.txt", "w");
     if (arquivo == NULL) {
-        printf("Erro critico: Nao foi possivel abrir o ficheiro 'jogos.txt' para escrita.\n");
+        printf("Erro feio.\n");
         return;
     }
     
