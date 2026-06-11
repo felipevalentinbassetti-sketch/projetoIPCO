@@ -1,1 +1,2 @@
-LOL; MOBA; 10; 18; 1000
+LOL; MOBA; 10.00; 18; 1000
+mario; corrida; 100.00; 3; 10
