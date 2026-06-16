@@ -32,10 +32,10 @@ int main(){
                 totalJogos = cadastrarJogo(inventario, totalJogos);
                 break;
             case 2:
-                //registrarCompra();
+                registrarCompra(inventario, totalJogos);
                 break;
             case 3:
-                //exibirRelatorios();
+                exibirRelatorios(inventario,totalJogos);
                 break;
             case 4:
                 //gerenciarAvaliacoes();

@@ -12,4 +12,7 @@ typedef struct{
 int carregarJogos(Jogo vetorJogos[]);
 int cadastrarJogo(Jogo vetorJogos[], int totalJogos);
 void salvarJogos(Jogo vetorJogos[], int totalJogos);
+void registrarCompra(Jogo vetorJogos[], int totalJogos);
+void exibirRelatorios(Jogo vetorJogos[], int totalJogos);
+
 #endif
