@@ -14,5 +14,5 @@ int cadastrarJogo(Jogo vetorJogos[], int totalJogos);
 void salvarJogos(Jogo vetorJogos[], int totalJogos);
 void registrarCompra(Jogo vetorJogos[], int totalJogos);
 void exibirRelatorios(Jogo vetorJogos[], int totalJogos);
-
+void gerenciarAvaliacoes(Jogo vetorJogos[], int totalJogos, int matrizAvaliacoes[][100], int qtdAvaliacoesPorJogo[]);
 #endif

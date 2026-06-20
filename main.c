@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "loja.h"
+#include "bib/loja.h"
 int main(){
     Jogo inventario[100];
     int totalJogos;
@@ -8,6 +8,9 @@ int main(){
     totalJogos = carregarJogos(inventario);
 
     printf("%d",totalJogos);
+
+    int matrizAvaliacoes[100][100]; 
+    int qtdAvaliacoesPorJogo[100] = {0}; 
 
 
     do {
@@ -38,7 +41,7 @@ int main(){
                 exibirRelatorios(inventario,totalJogos);
                 break;
             case 4:
-                //gerenciarAvaliacoes();
+                gerenciarAvaliacoes(inventario, totalJogos, matrizAvaliacoes, qtdAvaliacoesPorJogo);
                 break;
             case 0:
                 salvarJogos(inventario, totalJogos); 

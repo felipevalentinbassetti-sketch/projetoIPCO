@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-#include "loja.h"
+#include "../bib/loja.h"
 
 int carregarJogos(Jogo vetorJogos[]){
-    FILE *arquivo = fopen("jogos.txt","r");
+    FILE *arquivo = fopen("txt/jogos.txt","r");
     int contador = 0;
 
     if(arquivo == NULL){
-        printf("Arquivo 'jogos.txt' nao existe, inventario vazio");
+        printf("Arquivo 'txt/jogos.txt' nao existe, inventario vazio");
         return 0;
     }
 
@@ -77,7 +77,7 @@ int cadastrarJogo(Jogo vetorJogos[], int totalJogos){
 }
 
 void salvarJogos(Jogo vetorJogos[], int totalJogos) {
-    FILE *arquivo = fopen("jogos.txt", "w");
+    FILE *arquivo = fopen("txt/jogos.txt", "w");
     if (arquivo == NULL) {
         printf("Erro feio.\n");
         return;
@@ -126,9 +126,9 @@ void registrarCompra(Jogo vetorJogos[], int totalJogos) {
     
     vetorJogos[indice].downloads += quantidade;
     
-    FILE *arquivoCompras = fopen("compras.txt", "a");
+    FILE *arquivoCompras = fopen("txt/compras.txt", "a");
     if (arquivoCompras == NULL) {
-        printf("Erro ao abrir o ficheiro 'compras.txt' para registo.\n");
+        printf("Erro ao abrir o ficheiro 'txt/compras.txt' para registo.\n");
         return;
     }
     
@@ -167,7 +167,7 @@ void exibirRelatorios(Jogo vetorJogos[], int totalJogos) {
         }
     }
 
-    FILE *arquivoCompras = fopen("compras.txt", "r");
+    FILE *arquivoCompras = fopen("txt/compras.txt", "r");
     float faturamentoBruto = 0;
     int qtdTotalVendida = 0;
     
@@ -176,7 +176,6 @@ void exibirRelatorios(Jogo vetorJogos[], int totalJogos) {
         float valorTemp;
         int qtdTemp;
         
-        // BUG CORRIGIDO: Adicionado o ';' apos o %f que faltava no padrao de leitura!
         while (fscanf(arquivoCompras, " %49[^;]; %f; %d\n", nomeTemp, &valorTemp, &qtdTemp) == 3) {
             faturamentoBruto += (valorTemp * qtdTemp);
             qtdTotalVendida += qtdTemp;
@@ -201,4 +200,97 @@ void exibirRelatorios(Jogo vetorJogos[], int totalJogos) {
     printf("â€¢ Jogo mais caro: %s (R$ %.2f)\n", vetorJogos[idxMaisCaro].nome, vetorJogos[idxMaisCaro].preco);
     printf("â€¢ Jogo mais barato: %s (R$ %.2f)\n", vetorJogos[idxMaisBarato].nome, vetorJogos[idxMaisBarato].preco);
     printf("========================================\n");
+}
+
+void gerenciarAvaliacoes(Jogo vetorJogos[], int totalJogos, int matrizAvaliacoes[][100], int qtdAvaliacoesPorJogo[]) {
+    if (totalJogos == 0) {
+        printf("\nNenhum jogo cadastrado para avaliacao.\n");
+        return;
+    }
+
+    int opcao, escolha, nota;
+
+    printf("\n--- SISTEMA DE AVALIACOES ---\n");
+    printf("1. Registar nova avaliacao\n");
+    printf("2. Exibir estatisticas de avaliacoes\n");
+    printf("Escolha uma opcao: ");
+    if (scanf("%d", &opcao) != 1) {
+        printf("Opcao invalida.\n");
+        return;
+    }
+
+    if (opcao == 1) {
+        printf("\nSelecione um jogo para avaliar:\n");
+        for (int i = 0; i < totalJogos; i++) {
+            printf("%d. %s\n", i + 1, vetorJogos[i].nome);
+        }
+        printf("Opcao (1 a %d): ", totalJogos);
+        if (scanf("%d", &escolha) != 1) {
+            return;
+        }
+        
+        int idx = escolha - 1;
+        if (idx >= 0 && idx < totalJogos) {
+            if (qtdAvaliacoesPorJogo[idx] >= 100) {
+                printf("Erro: Limite maximo de 100 avaliacoes atingido para este jogo.\n");
+                return;
+            }
+            do {
+                printf("Atribua uma nota de 0 a 10 para '%s': ", vetorJogos[idx].nome);
+                if (scanf("%d", &nota) != 1) {
+                    printf("Entrada invalida! Introduza um numero.\n");
+                    nota = -1;
+                } else if (nota < 0 || nota > 10) {
+                    printf("Nota invalida! Deve ser entre 0 e 10.\n");
+                }
+            } while (nota < 0 || nota > 10);
+            
+            int col = qtdAvaliacoesPorJogo[idx];
+            matrizAvaliacoes[idx][col] = nota;
+            qtdAvaliacoesPorJogo[idx]++;
+            printf("Avaliacao registada com sucesso!\n");
+        } else {
+            printf("Jogo inexistente.\n");
+        }
+    } 
+    else if (opcao == 2) {
+        int melhorJogoIdx = -1;
+        float maiorMedia = -1;
+        int totalAvaliacoesSistema = 0;
+        float somaGeralNotas = 0;
+
+        for (int i = 0; i < totalJogos; i++) {
+            if (qtdAvaliacoesPorJogo[i] > 0) {
+                int somaNotasJogo = 0;
+                for (int j = 0; j < qtdAvaliacoesPorJogo[i]; j++) {
+                    somaNotasJogo += matrizAvaliacoes[i][j];
+                    totalAvaliacoesSistema++;
+                }
+                
+                float mediaJogo = (float)somaNotasJogo / qtdAvaliacoesPorJogo[i];
+                somaGeralNotas += somaNotasJogo;
+
+                if (mediaJogo > maiorMedia) {
+                    maiorMedia = mediaJogo;
+                    melhorJogoIdx = i;
+                }
+            }
+        }
+
+        if (totalAvaliacoesSistema == 0) {
+            printf("\nNenhuma avaliacao registada no sistema ate ao momento.\n");
+        } else {
+            printf("\n========================================\n");
+            printf("       ESTATISTICAS DE AVALIACOES\n");
+            printf("========================================\n");
+            printf("• Avaliacoes globais registadas: %d\n", totalAvaliacoesSistema);
+            printf("• Media geral das avaliacoes: %.2f / 10\n", somaGeralNotas / totalAvaliacoesSistema);
+            if (melhorJogoIdx != -1) {
+                printf("• Jogo com melhor media: %s (Media: %.2f)\n", vetorJogos[melhorJogoIdx].nome, maiorMedia);
+            }
+            printf("========================================\n");
+        }
+    } else {
+        printf("Opcao invalida.\n");
+    }
 }
