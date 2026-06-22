@@ -6,3 +6,4 @@ lolll; llll; 1111.00; 1; 1
 ou; w; 0.00; 1; 1
 cod; tiro; 100.00; 18; 12
 a; e; 10.00; 1; 1
+Minecraft; Blocos; 100.00; 8; 100010

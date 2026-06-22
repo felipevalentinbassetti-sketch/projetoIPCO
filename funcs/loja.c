@@ -283,10 +283,10 @@ void gerenciarAvaliacoes(Jogo vetorJogos[], int totalJogos, int matrizAvaliacoes
             printf("\n========================================\n");
             printf("       ESTATISTICAS DE AVALIACOES\n");
             printf("========================================\n");
-            printf("• Avaliacoes globais registadas: %d\n", totalAvaliacoesSistema);
-            printf("• Media geral das avaliacoes: %.2f / 10\n", somaGeralNotas / totalAvaliacoesSistema);
+            printf("-Avaliacoes globais registadas: %d\n", totalAvaliacoesSistema);
+            printf("-Media geral das avaliacoes: %.2f / 10\n", somaGeralNotas / totalAvaliacoesSistema);
             if (melhorJogoIdx != -1) {
-                printf("• Jogo com melhor media: %s (Media: %.2f)\n", vetorJogos[melhorJogoIdx].nome, maiorMedia);
+                printf("-Jogo com melhor media: %s (Media: %.2f)\n", vetorJogos[melhorJogoIdx].nome, maiorMedia);
             }
             printf("========================================\n");
         }
