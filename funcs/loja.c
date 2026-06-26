@@ -132,7 +132,6 @@ void registrarCompra(Jogo vetorJogos[], int totalJogos) {
         return;
     }
     
-    // Gravacao inclui os pontos e virgulas corretamente
     fprintf(arquivoCompras, "%s; %.2f; %d\n", vetorJogos[indice].nome, vetorJogos[indice].preco, quantidade);
     fclose(arquivoCompras);
     
