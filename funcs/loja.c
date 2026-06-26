@@ -189,15 +189,15 @@ void exibirRelatorios(Jogo vetorJogos[], int totalJogos) {
     printf("\n========================================\n");
     printf("         RELATORIOS DO SISTEMA\n");
     printf("========================================\n");
-    printf("â€¢ Jogo mais vendido: %s (%d downloads)\n", vetorJogos[idxMaisVendido].nome, vetorJogos[idxMaisVendido].downloads);
-    printf("â€¢ Quantidade total de downloads: %d\n", totalDownloadsMemoria);
-    printf("â€¢ Faturamento bruto: R$ %.2f\n", faturamentoBruto);
-    printf("â€¢ Impostos recolhidos (20%%): R$ %.2f\n", faturamentoBruto * 0.20);
-    printf("â€¢ Faturamento liquido: R$ %.2f\n", faturamentoLiquido);
-    printf("â€¢ Media de valor dos jogos disponiveis: R$ %.2f\n", mediaDisponiveis);
-    printf("â€¢ Media de valor dos jogos vendidos: R$ %.2f\n", mediaVendidos);
-    printf("â€¢ Jogo mais caro: %s (R$ %.2f)\n", vetorJogos[idxMaisCaro].nome, vetorJogos[idxMaisCaro].preco);
-    printf("â€¢ Jogo mais barato: %s (R$ %.2f)\n", vetorJogos[idxMaisBarato].nome, vetorJogos[idxMaisBarato].preco);
+    printf("- Jogo mais vendido: %s (%d downloads)\n", vetorJogos[idxMaisVendido].nome, vetorJogos[idxMaisVendido].downloads);
+    printf("- Quantidade total de downloads: %d\n", totalDownloadsMemoria);
+    printf("- Faturamento bruto: R$ %.2f\n", faturamentoBruto);
+    printf("- Impostos recolhidos (20%%): R$ %.2f\n", faturamentoBruto * 0.20);
+    printf("- Faturamento liquido: R$ %.2f\n", faturamentoLiquido);
+    printf("- Media de valor dos jogos disponiveis: R$ %.2f\n", mediaDisponiveis);
+    printf("- Media de valor dos jogos vendidos: R$ %.2f\n", mediaVendidos);
+    printf("- Jogo mais caro: %s (R$ %.2f)\n", vetorJogos[idxMaisCaro].nome, vetorJogos[idxMaisCaro].preco);
+    printf("- Jogo mais barato: %s (R$ %.2f)\n", vetorJogos[idxMaisBarato].nome, vetorJogos[idxMaisBarato].preco);
     printf("========================================\n");
 }
 
